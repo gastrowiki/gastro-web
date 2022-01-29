@@ -1,23 +1,21 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import styles from '../styles/Login.module.css'
+import { NextPage } from "next";
+import Head from "next/head";
 
-const Login: NextPage = () => {
+const LoginPage: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Login the Gastro Cooperative</title>
-        <meta name="description" content="A living history of the world's food written by its people" />
+        <title>LoginPage the Gastro Cooperative</title>
+        <meta
+          name="description"
+          content="A living history of the world's food written by its people"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Login
-        </h1>
-      </main>
-    </div>
-  )
-}
+      <h1>LoginPage</h1>
+    </>
+  );
+};
 
-export default Login
+export default LoginPage;

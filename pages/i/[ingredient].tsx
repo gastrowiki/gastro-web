@@ -1,23 +1,20 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import styles from '../styles/Ingredient.module.css'
+import { NextPage } from "next";
+import Head from "next/head";
 
-const Ingredient: NextPage = () => {
+const IngredientPage: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Ingredient the Gastro Cooperative</title>
-        <meta name="description" content="A living history of the world's food written by its people" />
+        <title>IngredientPage the Gastro Cooperative</title>
+        <meta
+          name="description"
+          content="A living history of the world's food written by its people"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <h1>IngredientPage</h1>
+    </>
+  );
+};
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Ingredient
-        </h1>
-      </main>
-    </div>
-  )
-}
-
-export default Ingredient
+export default IngredientPage;
