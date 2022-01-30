@@ -1,3 +1,7 @@
+@mixin serifFont {
+  font-family: Baskerville, Baskerville Old Face, Hoefler Text, Garamond, Times New Roman, serif;
+  font-weight: 600;
+}
 body {
   font-size: 16px;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -5,8 +9,7 @@ body {
   color: $black;
 }
 h1, h2, h3, h4, h5, h6 {
-  font-family: Baskerville, Baskerville Old Face, Hoefler Text, Garamond, Times New Roman, serif;
-  font-weight: 600;
+  @include serifFont;
 }
 h1 {
   font-size: 32px;

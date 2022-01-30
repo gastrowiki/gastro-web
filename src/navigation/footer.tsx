@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import navStyles from "./navigation.module.css";
+import navStyles from "./navigation.module.scss";
 
 const Footer = () => {
   return (
