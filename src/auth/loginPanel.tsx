@@ -6,8 +6,8 @@ import { userCurrentUser } from 'auth'
 import { ILoginUser } from 'auth/auth.types'
 
 const LoginPanel = () => {
-  const { login } = userCurrentUser()
   const router = useRouter();
+  const { login } = userCurrentUser()
   const { redirect } = router.query;
 
   const handleSubmit = async (credentials: ILoginUser) => {
@@ -27,6 +27,7 @@ const LoginPanel = () => {
         <h2>Login</h2>
         <Field type="text" name="username" placeholder="Username / email" />
         <Field type="password" name="password" placeholder="Password" />
+        <button type="submit">Login</button>
       </Form>
     </Formik>
   );

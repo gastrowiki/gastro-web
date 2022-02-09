@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import Head from "next/head";
 
+import { LoginPanel } from 'auth'
+
 const LoginPage: NextPage = () => {
   return (
     <>
@@ -13,7 +15,7 @@ const LoginPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>LoginPage</h1>
+      <LoginPanel />
     </>
   );
 };
