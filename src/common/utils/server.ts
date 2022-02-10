@@ -1,13 +1,20 @@
 type MethodType = "GET" | "POST" | "PUT" | "DELETE";
 
-const serverRequest = async <T>(method: MethodType, path: string, body?: any) =>
-  fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1${path}`, {
+const serverRequest = async <T>(method: MethodType, path: string, body?: any) => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1${path}`, {
     body: JSON.stringify(body),
     method,
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
-  }).then((response) => response.json() as Promise<T>);
+    credentials: "include",
+  });
+  if (response.status >= 400) {
+    throw new Error(await response.text());
+  }
+  return response.json() as Promise<T>;
+}
 
 export default {
   GET: <T>(path: string) => serverRequest<T>("GET", path),
