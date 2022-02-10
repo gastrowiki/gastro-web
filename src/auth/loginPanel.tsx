@@ -1,5 +1,6 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import Link from "next/link";
+import { Formik, FormikHelpers, Form, Field } from "formik";
 import { useRouter } from "next/router";
 import { server } from "common/utils";
 
@@ -11,14 +12,15 @@ const LoginPanel = () => {
   const { login } = userCurrentUser();
   const { redirect } = router.query;
 
-  const handleSubmit = async (credentials: ILoginUser) => {
+  const handleSubmit = async (
+    credentials: ILoginUser,
+    { setFieldError }: FormikHelpers<ILoginUser>
+  ) => {
     try {
       await login(credentials);
-      if (redirect && typeof redirect === "string") {
-        router.push(redirect);
-      }
-    } catch (error) {
-      console.log(error);
+      router.push(typeof redirect === "string" ? redirect : "/");
+    } catch (error: any) {
+      setFieldError("username", error);
     }
   };
 
@@ -39,7 +41,9 @@ const LoginPanel = () => {
           <button type="submit">Login</button>
         </Form>
       </Formik>
-      <button onClick={handleClick}>Protected Route</button>
+      <Link href="/signup">
+        <a>Create a new account</a>
+      </Link>
     </>
   );
 };

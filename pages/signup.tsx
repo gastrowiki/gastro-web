@@ -1,11 +1,13 @@
 import { NextPage } from "next";
 import Head from "next/head";
 
-const RegisterPage: NextPage = () => {
+import { SignupPanel } from 'auth'
+
+const SignupPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>RegisterPage the Gastro Cooperative</title>
+        <title>SignupPage the Gastro Cooperative</title>
         <meta
           name="description"
           content="A living history of the world's food written by its people"
@@ -13,9 +15,9 @@ const RegisterPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>RegisterPage</h1>
+      <SignupPanel />
     </>
   );
 };
 
-export default RegisterPage;
+export default SignupPage;
