@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { Formik, FormikHelpers, Form } from "formik";
 import { NextPage } from "next";
+import { useEffect } from 'react';
 import { useRouter } from "next/router";
 
 import { ILoginUser } from "auth/auth.types";
@@ -11,8 +12,14 @@ import { userCurrentUser } from "auth";
 
 const LoginPage: NextPage = () => {
   const router = useRouter();
-  const { login } = userCurrentUser();
+  const { login, isLoggedIn } = userCurrentUser();
   const { redirect } = router.query;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push(redirect as string || "/profile");
+    }
+  }, [isLoggedIn]);
 
   const handleSubmit = async (
     credentials: ILoginUser,
@@ -20,7 +27,6 @@ const LoginPage: NextPage = () => {
   ) => {
     try {
       await login(credentials);
-      router.push(typeof redirect === "string" ? redirect : "/");
     } catch (error: any) {
       const { message, fieldErrors }: IRequestError = error;
       if (fieldErrors) {

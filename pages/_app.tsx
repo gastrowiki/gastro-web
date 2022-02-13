@@ -3,12 +3,12 @@ import { AppProps } from "next/app";
 
 import layoutStyles from "styles/layout.module.scss";
 import UserContextProvider from 'auth/userContextProvider'
-import { Header, Footer } from "navigation";
+import { Navigation, Footer } from "navigation";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
-      <Header />
+      <Navigation />
       <main className={layoutStyles.mainContent}>
         <Component {...pageProps} />
       </main>
