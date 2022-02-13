@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import Cookies from 'js-cookie';
 
-import { ILoginUser, IRegisterUser } from './auth.types'
+import { ILoginUser, IRegisterUser, IResetPassword } from './auth.types'
 import { IUser } from "common/types";
 import { server } from 'common/utils'
 
@@ -16,6 +16,8 @@ interface IUserContext {
   login: (data: ILoginUser) => Promise<IUser>;
   register: (data: IRegisterUser) => Promise<IUser>;
   user?: IUser;
+  forgotPassword: (email: string) => Promise<string>,
+  resetPassword: (data: IResetPassword) => Promise<boolean>,
 }
 
 const exampleUser: IUser = {
@@ -31,6 +33,8 @@ export const UserContext = createContext<IUserContext>({
   logout: () => {},
   login: async (_: ILoginUser) => exampleUser,
   register: async (_: IRegisterUser) => exampleUser,
+  forgotPassword: async (email: string) => email,
+  resetPassword: async (_: IResetPassword) => false,
 });
 export const userCurrentUser = () => useContext(UserContext);
 
@@ -55,12 +59,20 @@ const UserContextProvider = ({ children }: IUserContextProviderProps) => {
     setUser(user)
     return user;
   };
+  const forgotPassword = async (email: string) => server.POST<string>('/forgot-password', { email });
+  ;
+  const resetPassword = async (data: IResetPassword) => {
+    await server.POST<boolean>('/reset-password', data);
+    return true;
+  };
 
   const checkoutContextValues = {
+    forgotPassword,
     isLoggedIn: !!user,
     login,
     logout,
     register,
+    resetPassword,
     user,
   };
   return (

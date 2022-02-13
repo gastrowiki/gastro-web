@@ -7,7 +7,7 @@ export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   placeholder?: string;
   type?: string;
-  validate: (value: string) => undefined | string | Promise<undefined | string>;
+  validate?: (value: string) => undefined | string | Promise<undefined | string>;
 }
 
 const Input = ({
