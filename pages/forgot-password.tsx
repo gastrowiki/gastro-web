@@ -30,7 +30,7 @@ const ForgotPasswordPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>ForgotPasswordPage the Gastro Cooperative</title>
+        <title>Gastro: Forgot Password</title>
         <meta
           name="description"
           content="A living history of the world's food written by its people"
