@@ -1,17 +1,19 @@
-@import 'styles/colors.module.scss';
+@import "styles/colors.module.scss";
 
-.header {
-  position: sticky;
-  top: 0;
+.navigation {
+  position: fixed;
   left: 0;
-  width: 100%;
+  bottom: 0;
+  right: 0;
+  height: 50px;
   background-color: $almond;
+  border-top: 2px solid $asparagus;
+  z-index: 9999;
 }
 
 .container {
   max-width: 1200px;
   padding: 0 20px;
-  height: 50px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -19,6 +21,47 @@
 }
 
 .logo {
-  color: $asparagus;
-  font-weight: bolder;
+  font-family: Baskerville, Baskerville Old Face, Hoefler Text, Garamond,
+    Times New Roman, serif;
+  color: $orange;
+  font-weight: 600;
+  font-size: 32px;
+  text-shadow: 0.5px 0.5px 0 $asparagus;
+}
+
+.profile {
+  position: relative;
+}
+
+.avatarBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid $asparagus;
+  background-color: white;
+  display: block;
+  overflow: hidden;
+}
+
+.profileMenu {
+  position: fixed;
+  top: calc(100vh - 50px);
+  right: 0;
+  z-index: 10;
+  transform: translate3d(0, 0, 0);
+  transition: transform 200ms ease-in-out;
+  cursor: pointer;
+  padding: 20px;
+  text-align: right;
+  a {
+    display: block;
+    color: $orange;
+    margin-top: 0.5em;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+.profileMenuActive {
+  transform: translate3d(0, -100%, 0);
 }

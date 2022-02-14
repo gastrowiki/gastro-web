@@ -1,11 +1,23 @@
-import { NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-const ProfilePage: NextPage = () => {
+import { userCurrentUser } from "auth";
+
+const ProfilePage = () => {
+  const { user, isLoggedIn } = userCurrentUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/login");
+    }
+  }, [isLoggedIn]);
+
   return (
     <>
       <Head>
-        <title>Gastro Cooperative</title>
+        <title>Gastro: {user.given_name} {user.family_name}'s Profile</title>
         <meta
           name="description"
           content="A living history of the world's food written by its people"

@@ -1,0 +1,28 @@
+.inputContainer {
+  display: block;
+}
+
+.inputContainer + .inputContainer {
+  margin-top: 1em;
+}
+
+.inputLabel {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.error {
+  color: red;
+  font-weight: normal;
+}

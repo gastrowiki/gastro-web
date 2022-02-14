@@ -2,35 +2,40 @@ import React, {
   ReactNode,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
-import Cookies from 'js-cookie';
 
-import { ILoginUser, IRegisterUser } from './auth.types'
+import { ILoginUser, IRegisterUser, IResetPassword } from "./auth.types";
 import { IUser } from "common/types";
-import { server } from 'common/utils'
+import { server } from "common/utils";
 
 interface IUserContext {
   isLoggedIn: boolean;
-  logout: () => void;
+  logout: () => Promise<void>;
   login: (data: ILoginUser) => Promise<IUser>;
   register: (data: IRegisterUser) => Promise<IUser>;
-  user?: IUser;
+  user: IUser;
+  forgotPassword: (email: string) => Promise<string>;
+  resetPassword: (data: IResetPassword) => Promise<boolean>;
 }
 
-const exampleUser: IUser = {
-  id: '1',
+const emptyUser: IUser = {
+  id: "",
   bio: {},
-  email: '',
-  given_name: '',
-  family_name: '',
-  username: '',
+  email: "",
+  given_name: "",
+  family_name: "",
+  username: "",
 };
 export const UserContext = createContext<IUserContext>({
   isLoggedIn: false,
-  logout: () => {},
-  login: async (_: ILoginUser) => exampleUser,
-  register: async (_: IRegisterUser) => exampleUser,
+  logout: async () => {},
+  login: async (_: ILoginUser) => emptyUser,
+  register: async (_: IRegisterUser) => emptyUser,
+  forgotPassword: async (email: string) => email,
+  resetPassword: async (_: IResetPassword) => false,
+  user: emptyUser,
 });
 export const userCurrentUser = () => useContext(UserContext);
 
@@ -39,28 +44,45 @@ interface IUserContextProviderProps {
 }
 
 const UserContextProvider = ({ children }: IUserContextProviderProps) => {
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState(emptyUser);
+
+  useEffect(() => {
+    if (!user.id) {
+      server
+        .GET<IUser>("/me")
+        .then(setUser)
+        .catch(() => setUser(emptyUser));
+    }
+  }, []);
 
   const login = async (data: ILoginUser) => {
-    const user = await server.POST<IUser>('/login', data);
+    const user = await server.POST<IUser>("/login", data);
     setUser(user);
     return user;
   };
-  const logout = () => {
-    setUser(undefined);
-    Cookies.remove('token');
+  const logout = async () => {
+    await server.GET('/logout')
+    setUser(emptyUser);
   };
   const register = async (data: IRegisterUser) => {
-    const user = await server.POST<IUser>('/signup', data);
-    setUser(user)
+    const user = await server.POST<IUser>("/signup", data);
+    setUser(user);
     return user;
+  };
+  const forgotPassword = async (email: string) =>
+    server.POST<string>("/forgot-password", { email });
+  const resetPassword = async (data: IResetPassword) => {
+    await server.POST<boolean>("/reset-password", data);
+    return true;
   };
 
   const checkoutContextValues = {
-    isLoggedIn: !!user,
+    forgotPassword,
+    isLoggedIn: !!user.id,
     login,
     logout,
     register,
+    resetPassword,
     user,
   };
   return (
