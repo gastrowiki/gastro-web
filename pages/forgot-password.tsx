@@ -2,13 +2,16 @@ import Head from "next/head";
 import Link from "next/link";
 import { Formik, FormikHelpers, Form } from "formik";
 import { NextPage } from "next";
+import { useState } from "react";
 
+import authStyles from "styles/auth.module.scss";
 import { Input } from "common/forms";
 import { IForgotPassword } from "auth/auth.types";
 import { IRequestError } from "common/types";
 import { userCurrentUser } from "auth";
 
 const ForgotPasswordPage: NextPage = () => {
+  const [submitted, setSubmitted] = useState(false);
   const { forgotPassword } = userCurrentUser();
 
   const handleSubmit = async (
@@ -17,7 +20,8 @@ const ForgotPasswordPage: NextPage = () => {
   ) => {
     try {
       await forgotPassword(email);
-    } catch (error: any) {
+      setSubmitted(true);
+    } catch (error) {
       const { message, fieldErrors }: IRequestError = error;
       if (fieldErrors) {
         setErrors(fieldErrors);
@@ -28,7 +32,7 @@ const ForgotPasswordPage: NextPage = () => {
   };
 
   return (
-    <>
+    <div className={authStyles.authPanel}>
       <Head>
         <title>Gastro: Forgot Password</title>
         <meta
@@ -38,17 +42,24 @@ const ForgotPasswordPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Formik initialValues={{ email: "" }} onSubmit={handleSubmit}>
-        <Form>
-          <h2>Reset your password</h2>
-          <Input label="Email" name="email" placeholder="Email" />
-          <button type="submit">Reset</button>
-        </Form>
-      </Formik>
+      {submitted ? (
+        <>
+          <h2>Success!</h2>
+          <h6>Reset instructions have been sent to your email</h6>
+        </>
+      ) : (
+        <Formik initialValues={{ email: "" }} onSubmit={handleSubmit}>
+          <Form>
+            <h2>Reset your password</h2>
+            <Input label="Email" name="email" placeholder="Email" />
+            <button type="submit">Reset</button>
+          </Form>
+        </Formik>
+      )}
       <Link href="/login">
         <a>Return to Log In</a>
       </Link>
-    </>
+    </div>
   );
 };
 

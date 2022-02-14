@@ -5,6 +5,7 @@ import { Formik, FormikHelpers, Form } from "formik";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
+import authStyles from "styles/auth.module.scss";
 import { IRegisterUser } from "auth/auth.types";
 import { IRequestError } from "common/types";
 import { Input } from "common/forms";
@@ -46,7 +47,7 @@ const SignupPage: NextPage = () => {
   };
 
   return (
-    <>
+    <div className={authStyles.authPanel}>
       <Head>
         <title>Gastro: Create Your Account</title>
         <meta
@@ -106,7 +107,7 @@ const SignupPage: NextPage = () => {
       <Link href="/login">
         <a>Log In</a>
       </Link>
-    </>
+    </div>
   );
 };
 

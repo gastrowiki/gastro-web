@@ -5,6 +5,7 @@ import { NextPage } from "next";
 import { useEffect } from 'react';
 import { useRouter } from "next/router";
 
+import authStyles from "styles/auth.module.scss";
 import { ILoginUser } from "auth/auth.types";
 import { IRequestError } from "common/types";
 import { Input } from "common/forms";
@@ -38,7 +39,7 @@ const LoginPage: NextPage = () => {
   };
 
   return (
-    <>
+    <div className={authStyles.authPanel}>
       <Head>
         <title>Gastro: Login</title>
         <meta
@@ -71,10 +72,10 @@ const LoginPage: NextPage = () => {
       <Link href="/signup">
         <a>Create an Account</a>
       </Link>
-      <Link href="/reset-password">
+      <Link href="/forgot-password">
         <a>Forgot your password?</a>
       </Link>
-    </>
+    </div>
   );
 };
 
