@@ -1,7 +1,12 @@
 {
-  "name": "plate",
+  "name": "gastro-web",
   "version": "0.1.0",
-  "private": true,
+  "description": "people creating the history and future of food",
+  "homepage": "https://gastro.wiki",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/gastrowiki/gastro-web/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,7 +19,6 @@
   },
   "dependencies": {
     "formik": "^2.2.9",
-    "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "next": "12.0.8",
     "react": "17.0.2",
