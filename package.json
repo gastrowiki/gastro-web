@@ -1,7 +1,7 @@
 {
   "name": "gastro-web",
   "version": "0.1.0",
-  "description": "people creating the history and future of food",
+  "description": "A living history of the world's food written by its people",
   "homepage": "https://gastro.wiki",
   "private": false,
   "bugs": {
