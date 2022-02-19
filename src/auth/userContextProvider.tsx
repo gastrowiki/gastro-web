@@ -29,7 +29,7 @@ const emptyUser: IUser = {
   username: "",
 };
 export const UserContext = createContext<IUserContext>({
-  isLoggedIn: false,
+  isLoggedIn: true,
   logout: async () => {},
   login: async (_: ILoginUser) => emptyUser,
   register: async (_: IRegisterUser) => emptyUser,
@@ -44,29 +44,38 @@ interface IUserContextProviderProps {
 }
 
 const UserContextProvider = ({ children }: IUserContextProviderProps) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [user, setUser] = useState(emptyUser);
 
   useEffect(() => {
-    if (!user.id) {
-      server
-        .GET<IUser>("/me")
-        .then(setUser)
-        .catch(() => setUser(emptyUser));
-    }
+    getUser();
   }, []);
 
+  const getUser = async () => {
+    try {
+      const user = await server.GET<IUser>("/me");
+      setIsLoggedIn(true);
+      setUser(user);
+    } catch {
+      setUser(emptyUser);
+      setIsLoggedIn(false);
+    }
+  };
   const login = async (data: ILoginUser) => {
     const user = await server.POST<IUser>("/login", data);
     setUser(user);
+    setIsLoggedIn(true);
     return user;
   };
   const logout = async () => {
-    await server.GET('/logout')
+    await server.GET("/logout");
     setUser(emptyUser);
+    setIsLoggedIn(false);
   };
   const register = async (data: IRegisterUser) => {
     const user = await server.POST<IUser>("/signup", data);
     setUser(user);
+    setIsLoggedIn(true);
     return user;
   };
   const forgotPassword = async (email: string) =>
@@ -78,7 +87,7 @@ const UserContextProvider = ({ children }: IUserContextProviderProps) => {
 
   const checkoutContextValues = {
     forgotPassword,
-    isLoggedIn: !!user.id,
+    isLoggedIn,
     login,
     logout,
     register,

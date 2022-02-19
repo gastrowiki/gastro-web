@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { userCurrentUser } from "auth";
+import UserInfo from 'profile/UserInfo'
 
 const ProfilePage = () => {
   const { user, isLoggedIn } = userCurrentUser();
@@ -25,6 +26,7 @@ const ProfilePage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <UserInfo />
       <ul>
         <li>Personal Info</li>
         <li>Engagement Stats / Revenue</li>
