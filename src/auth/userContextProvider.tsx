@@ -2,7 +2,6 @@ import React, {
   ReactNode,
   createContext,
   useContext,
-  useEffect,
   useState,
 } from "react";
 
@@ -41,26 +40,13 @@ export const userCurrentUser = () => useContext(UserContext);
 
 interface IUserContextProviderProps {
   children: ReactNode;
+  userFromServer?: IUser;
 }
 
-const UserContextProvider = ({ children }: IUserContextProviderProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [user, setUser] = useState(emptyUser);
+const UserContextProvider = ({ children, userFromServer }: IUserContextProviderProps) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!userFromServer);
+  const [user, setUser] = useState(userFromServer || emptyUser);
 
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const getUser = async () => {
-    try {
-      const user = await server.GET<IUser>("/me");
-      setIsLoggedIn(true);
-      setUser(user);
-    } catch {
-      setUser(emptyUser);
-      setIsLoggedIn(false);
-    }
-  };
   const login = async (data: ILoginUser) => {
     const user = await server.POST<IUser>("/login", data);
     setUser(user);
