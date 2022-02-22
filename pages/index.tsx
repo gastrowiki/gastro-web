@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 
 const HomePage: NextPage = () => {
   return (
@@ -17,51 +18,69 @@ const HomePage: NextPage = () => {
       <h5>User</h5>
       <ul>
         <li>
-          <a href="/u/velomash">Velomash</a>
+          <Link href="/u/velomash">
+            <a>Velomash</a>
+          </Link>
         </li>
         <li>
-          <a href="/u/velomash/recipes/enchiladas">Enchiladas</a>
+          <Link href="/u/velomash/recipes/enchiladas">
+            <a>Enchiladas</a>
+          </Link>
         </li>
         <li>
-          <a href="/u/velomash/articles/where-to-eat-in-sf">
-            Where to eat in SF
-          </a>
+          <Link href="/u/velomash/articles/where-to-eat-in-sf">
+            <a>Where to eat in SF</a>
+          </Link>
         </li>
       </ul>
       <h5>Profile</h5>
       <ul>
         <li>
-          <a href="/profile">Profile</a>
+          <Link href="/profile">
+            <a>Profile</a>
+          </Link>
         </li>
         <li>
-          <a href="/login">Login</a>
+          <Link href="/login">
+            <a>Login</a>
+          </Link>
         </li>
         <li>
-          <a href="/register">Register</a>
+          <Link href="/register">
+            <a>Register</a>
+          </Link>
         </li>
       </ul>
       <h5>Ingredients</h5>
       <ul>
         <li>
-          <a href="/i/salt">Salt</a>
+          <Link href="/i/salt">
+            <a>Salt</a>
+          </Link>
         </li>
       </ul>
       <h5>Methods</h5>
       <ul>
         <li>
-          <a href="/m/grill">Grilling</a>
+          <Link href="/m/grill">
+            <a>Grilling</a>
+          </Link>
         </li>
       </ul>
       <h5>Equipment</h5>
       <ul>
         <li>
-          <a href="/e/wok">Wok</a>
+          <Link href="/e/wok">
+            <a>Wok</a>
+          </Link>
         </li>
       </ul>
       <h5>Search</h5>
       <ul>
         <li>
-          <a href="/s?q=enchiladas">Search for Enchiladas</a>
+          <Link href="/s?q=enchiladas">
+            <a>Search for Enchiladas</a>
+          </Link>
         </li>
       </ul>
     </>

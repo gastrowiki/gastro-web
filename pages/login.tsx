@@ -20,7 +20,7 @@ const LoginPage: NextPage = () => {
     if (isLoggedIn) {
       router.push(redirect as string || "/profile");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, redirect, router]);
 
   const handleSubmit = async (
     credentials: ILoginUser,

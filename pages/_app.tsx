@@ -5,7 +5,6 @@ import UserContextProvider from 'auth/userContextProvider'
 import layoutStyles from "styles/layout.module.scss";
 import { IUser } from "common/types";
 import { Navigation, Footer } from "navigation";
-import { server } from "common/utils";
 
 interface IAppProps extends AppProps {
   userFromServer?: IUser;
@@ -30,9 +29,16 @@ MyApp.getInitialProps = async ({ Component, ctx }: AppContext) => {
     pageProps = await Component.getInitialProps(ctx);
   }
 
-  const user = await server.GET<IUser>("/me", ctx.req?.headers);
+  let userFromServer: IUser | undefined;
 
-  return { pageProps, userFromServer: user };
+  if (ctx.res && ctx.res.locals && ctx.res.locals.user) {
+    userFromServer = {
+      ...ctx.res.locals.user,
+      id: ctx.res.locals.user.sub,
+    };
+  }
+
+  return { pageProps, userFromServer };
 };
 
 export default MyApp;

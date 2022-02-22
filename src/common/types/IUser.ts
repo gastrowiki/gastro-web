@@ -3,7 +3,7 @@ import IAddress from './IAddress'
 
 export default interface IUser {
   id: string;
-  bio: TranslatedString;
+  bio?: TranslatedString;
   address?: IAddress;
   birthdate?: Date;
   commission_rate?: number;
@@ -11,7 +11,7 @@ export default interface IUser {
   family_name: string;
   favorite_count?: number;
   given_name: string;
-  languages?: ActiveLanguages[];
+  languages?: ActiveLanguages[] | string[];
   middle_name?: string;
   phone_number?: string;
   picture?: string;

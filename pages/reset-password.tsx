@@ -30,7 +30,7 @@ const SignupPage: NextPage = () => {
       });
       setSubmitted(true);
     } catch (error) {
-      const { message, fieldErrors }: IRequestError = error;
+      const { message, fieldErrors }: IRequestError = error as any;
       if (fieldErrors) {
         setErrors(fieldErrors);
       } else {

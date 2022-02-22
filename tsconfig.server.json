@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "noEmit": false
+  },
+  "include": ["globals.d.ts", "next-env.d.ts", "src/server"]
+}
