@@ -1,5 +1,1 @@
-import server from './server'
-
-export {
-  server,
-}
+export { serverRequest, serverRequestSSR } from './serverRequest'

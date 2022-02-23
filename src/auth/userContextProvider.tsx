@@ -7,7 +7,7 @@ import React, {
 
 import { ILoginUser, IRegisterUser, IResetPassword } from "./auth.types";
 import { IUser } from "common/types";
-import { server } from "common/utils";
+import { serverRequest } from "common/utils";
 
 interface IUserContext {
   isLoggedIn: boolean;
@@ -44,36 +44,32 @@ interface IUserContextProviderProps {
 }
 
 const UserContextProvider = ({ children, userFromServer }: IUserContextProviderProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!userFromServer);
   const [user, setUser] = useState(userFromServer || emptyUser);
 
   const login = async (data: ILoginUser) => {
-    const user = await server.POST<IUser>("/login", data);
+    const user = await serverRequest.POST<IUser>("/login", data);
     setUser(user);
-    setIsLoggedIn(true);
     return user;
   };
   const logout = async () => {
-    await server.GET("/logout");
+    await serverRequest.GET("/logout");
     setUser(emptyUser);
-    setIsLoggedIn(false);
   };
   const register = async (data: IRegisterUser) => {
-    const user = await server.POST<IUser>("/signup", data);
+    const user = await serverRequest.POST<IUser>("/signup", data);
     setUser(user);
-    setIsLoggedIn(true);
     return user;
   };
   const forgotPassword = async (email: string) =>
-    server.POST<string>("/forgot-password", { email });
+    serverRequest.POST<string>("/forgot-password", { email });
   const resetPassword = async (data: IResetPassword) => {
-    await server.POST<boolean>("/reset-password", data);
+    await serverRequest.POST<boolean>("/reset-password", data);
     return true;
   };
 
   const checkoutContextValues = {
     forgotPassword,
-    isLoggedIn,
+    isLoggedIn: user.id !== '',
     login,
     logout,
     register,

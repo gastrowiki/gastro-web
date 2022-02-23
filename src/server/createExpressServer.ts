@@ -17,11 +17,11 @@ export function createExpressServer(nextApp: any) {
 
   const app = express();
 
-  app.use(bodyParser.json(), compression(), cookieParser(), expressLogger, injectUserMiddleware);
+  app.use(bodyParser.json(), compression(), cookieParser(), injectUserMiddleware);
 
   if (process.env.NODE_ENV !== "development") {
     app.use(helmet());
-    app.use(contentSecurityPolicyMiddleware());
+    app.use(expressLogger, contentSecurityPolicyMiddleware());
   }
 
   app.use('/profile', protectedRouteMiddleware)

@@ -8,9 +8,9 @@ export const injectUserMiddleware = (req: Request, res: Response, next: NextFunc
     try {
       const userInfo = verifyJWT(jwt, JWT_SECRET!);
       res.locals.user = userInfo;
-      return next();
     } catch (err) {}
   }
+  return next();
 };
 
 export const protectedRouteMiddleware = (_: Request, res: Response, next: NextFunction) => {

@@ -9,7 +9,7 @@ import authStyles from "styles/auth.module.scss";
 import { IRegisterUser } from "auth/auth.types";
 import { IRequestError } from "common/types";
 import { Input } from "common/forms";
-import { server } from "common/utils";
+import { serverRequest } from "common/utils";
 import { userCurrentUser } from "auth";
 
 const checkUsernameAvailability = debounce(async (username: string) => {
@@ -17,7 +17,7 @@ const checkUsernameAvailability = debounce(async (username: string) => {
     return;
   }
   try {
-    await server.GET<boolean>(`/username-availability?username=${username}`);
+    await serverRequest.GET<boolean>(`/username-availability?username=${username}`);
   } catch (error: any) {
     const { message, fieldErrors }: IRequestError = error;
     return fieldErrors ? fieldErrors.username : message;
