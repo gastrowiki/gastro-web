@@ -5,14 +5,14 @@ import { useRouter } from "next/router";
 import UserInfo from "profile/UserInfo";
 import { IUser } from "common/types";
 import { serverRequestSSR } from "common/utils";
-import { userCurrentUser } from "auth";
+import { useCurrentUser } from "auth";
 
 interface IProfilePageProps {
   userProfile: IUser;
 }
 
 const ProfilePage = ({ userProfile }: IProfilePageProps) => {
-  const { isLoggedIn } = userCurrentUser();
+  const { isLoggedIn } = useCurrentUser();
   const router = useRouter();
 
   if (!isLoggedIn) {

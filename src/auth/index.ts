@@ -1,1 +1,1 @@
-export { userCurrentUser } from './userContextProvider'
+export { useCurrentUser } from './userContextProvider'

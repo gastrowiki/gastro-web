@@ -10,7 +10,7 @@ import { IRegisterUser } from "auth/auth.types";
 import { IRequestError } from "common/types";
 import { Input } from "common/forms";
 import { serverRequest } from "common/utils";
-import { userCurrentUser } from "auth";
+import { useCurrentUser } from "auth";
 
 const checkUsernameAvailability = debounce(async (username: string) => {
   if (!username) {
@@ -26,7 +26,7 @@ const checkUsernameAvailability = debounce(async (username: string) => {
 
 const SignupPage: NextPage = () => {
   const router = useRouter();
-  const { register } = userCurrentUser();
+  const { register } = useCurrentUser();
   const { redirect } = router.query;
 
   const handleSubmit = async (

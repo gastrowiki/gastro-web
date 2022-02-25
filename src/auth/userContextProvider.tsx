@@ -36,7 +36,7 @@ export const UserContext = createContext<IUserContext>({
   resetPassword: async (_: IResetPassword) => false,
   user: emptyUser,
 });
-export const userCurrentUser = () => useContext(UserContext);
+export const useCurrentUser = () => useContext(UserContext);
 
 interface IUserContextProviderProps {
   children: ReactNode;

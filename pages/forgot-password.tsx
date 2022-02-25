@@ -8,11 +8,11 @@ import authStyles from "styles/auth.module.scss";
 import { Input } from "common/forms";
 import { IForgotPassword } from "auth/auth.types";
 import { IRequestError } from "common/types";
-import { userCurrentUser } from "auth";
+import { useCurrentUser } from "auth";
 
 const ForgotPasswordPage: NextPage = () => {
   const [submitted, setSubmitted] = useState(false);
-  const { forgotPassword } = userCurrentUser();
+  const { forgotPassword } = useCurrentUser();
 
   const handleSubmit = async (
     { email }: IForgotPassword,

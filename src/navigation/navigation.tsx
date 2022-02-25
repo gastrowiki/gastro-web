@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import navStyles from "./navigation.module.scss";
-import { userCurrentUser } from "auth";
+import { useCurrentUser } from "auth";
 
 const Header = () => {
-  const { isLoggedIn, logout, user } = userCurrentUser();
+  const { isLoggedIn, logout, user } = useCurrentUser();
   const [profileMenuActive, setProfileMenuActive] = useState(false);
   const router = useRouter();
   const avatarUrl = user.picture || "/images/profile.svg";

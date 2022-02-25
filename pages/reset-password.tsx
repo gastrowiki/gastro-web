@@ -9,11 +9,11 @@ import authStyles from "styles/auth.module.scss";
 import { IRequestError } from "common/types";
 import { IResetPassword } from "auth/auth.types";
 import { Input } from "common/forms";
-import { userCurrentUser } from "auth";
+import { useCurrentUser } from "auth";
 
 const SignupPage: NextPage = () => {
   const [submitted, setSubmitted] = useState(false);
-  const { resetPassword } = userCurrentUser();
+  const { resetPassword } = useCurrentUser();
   const { query } = useRouter();
   const token = query.token as string;
   const email = query.email as string;

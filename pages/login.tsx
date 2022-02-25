@@ -9,11 +9,11 @@ import authStyles from "styles/auth.module.scss";
 import { ILoginUser } from "auth/auth.types";
 import { IRequestError } from "common/types";
 import { Input } from "common/forms";
-import { userCurrentUser } from "auth";
+import { useCurrentUser } from "auth";
 
 const LoginPage: NextPage = () => {
   const router = useRouter();
-  const { login, isLoggedIn } = userCurrentUser();
+  const { login, isLoggedIn } = useCurrentUser();
   const { redirect } = router.query;
 
   useEffect(() => {
