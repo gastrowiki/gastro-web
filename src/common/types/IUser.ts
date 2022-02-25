@@ -1,7 +1,7 @@
 import { ActiveLanguages, TranslatedString } from './LanguageTypes'
-import IAddress from './IAddress'
+import { IAddress } from './IAddress'
 
-export default interface IUser {
+export interface IUser {
   id: string;
   bio?: TranslatedString;
   address?: IAddress;

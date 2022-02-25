@@ -1,13 +1,5 @@
-import IUser from './IUser'
-import IAddress from './IAddress'
-import { ActiveLanguages, ILanguage, TranslatedString } from './LanguageTypes'
-import { IRequestError } from './RequestTypes'
-
-export type {
-  ActiveLanguages,
-  IAddress,
-  ILanguage,
-  IUser,
-  IRequestError,
-  TranslatedString,
-}
+export type { ActiveLanguages, ILanguage, TranslatedString } from './LanguageTypes'
+export type { IAddress } from './IAddress'
+export type { IMedia } from './IMedia'
+export type { IRequestError } from './RequestTypes'
+export type { IUser } from './IUser'
