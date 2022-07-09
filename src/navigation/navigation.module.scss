@@ -3,11 +3,11 @@
 .navigation {
   position: fixed;
   left: 0;
-  bottom: 0;
+  top: 0;
   right: 0;
   height: 50px;
-  background-color: $almond;
-  border-top: 2px solid $asparagus;
+  background-color: #eee;
+  border-bottom: 1px solid $asparagus;
   z-index: 9999;
 }
 
@@ -23,10 +23,10 @@
 .logo {
   font-family: Baskerville, Baskerville Old Face, Hoefler Text, Garamond,
     Times New Roman, serif;
-  color: $orange;
+  color: $asparagus;
   font-weight: 600;
   font-size: 32px;
-  text-shadow: 0.5px 0.5px 0 $asparagus;
+  text-shadow: 0.5px 0.5px 0 #aaa;
 }
 
 .profile {
@@ -34,8 +34,8 @@
 }
 
 .avatarBtn {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1px solid $asparagus;
   background-color: white;
